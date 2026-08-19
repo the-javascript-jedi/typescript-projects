@@ -1,21 +1,16 @@
-function reverse(nums: number[]): void {
-    // Two pointers — one from the left, one from the right
-    let left = 0;
-    let right = nums.length - 1;
-
-    // Move pointers toward each other, swapping as they go
-    while (left < right) {
-        // Swap nums[left] and nums[right]
-        const temp = nums[left];
-        nums[left] = nums[right];
-        nums[right] = temp;
-
-        left++;
-        right--;
+// Returns true if `nums` is sorted in ascending order (non-decreasing), false otherwise.
+function checkArraySorted(nums: number[]): boolean {
+  // Compare each element with the next one; stop one early (`length - 1`)
+  // so `nums[i + 1]` never goes out of bounds.
+  for (let i = 0; i < nums.length - 1; i++) {
+    // Found a pair that's out of order -> array is not sorted.
+    if (nums[i] > nums[i + 1]) {
+      return false;
     }
-    // No return needed — array is passed by reference, original is modified in place
+  }
+  // No out-of-order pair was found -> array is sorted.
+  return true;
 }
 
 const nums = [1, 2, 3, 4, 5];
-reverse(nums);
-console.log(nums); // [5, 4, 3, 2, 1]
+console.log("checkArraySorted(nums)", checkArraySorted(nums));
