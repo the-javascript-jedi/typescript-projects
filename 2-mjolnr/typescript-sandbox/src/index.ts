@@ -1,16 +1,15 @@
-// Returns true if `nums` is sorted in ascending order (non-decreasing), false otherwise.
-function checkArraySorted(nums: number[]): boolean {
-  // Compare each element with the next one; stop one early (`length - 1`)
-  // so `nums[i + 1]` never goes out of bounds.
-  for (let i = 0; i < nums.length - 1; i++) {
-    // Found a pair that's out of order -> array is not sorted.
-    if (nums[i] > nums[i + 1]) {
-      return false;
-    }
-  }
-  // No out-of-order pair was found -> array is sorted.
-  return true;
+// // using set
+// function removeDuplicates(nums: number[]): number[] {
+//   return [...new Set(nums)];
+// }
+
+// using filter
+function removeDuplicates(nums: number[]): number[] {
+  // keep num only if this is its first occurrence in the array
+  // (indexOf always returns the first match's index, so a later
+  // duplicate's own index won't equal it and gets filtered out)
+  return nums.filter((num, index) => nums.indexOf(num) === index);
 }
 
-const nums = [1, 2, 3, 4, 5];
-console.log("checkArraySorted(nums)", checkArraySorted(nums));
+const nums = [1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 8];
+console.log(removeDuplicates(nums));
